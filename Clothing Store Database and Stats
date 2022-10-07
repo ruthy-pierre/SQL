@@ -1,0 +1,36 @@
+--Create a clothing store database
+
+CREATE TABLE BK_Clothing (ID integer primary key, Name text,  Color text, Price integer, Floor integer); 
+
+INSERT INTO BK_Clothing VALUES (1, "Sweater", "Blue", 15, 1);
+INSERT INTO BK_Clothing VALUES (2, "Hoodie", "Black", 16, 1);
+INSERT INTO BK_Clothing VALUES (3, "Turtleneck", "Red", 14, 1); 
+INSERT INTO BK_Clothing VALUES (4, "Pullover", "Orange", 18, 1); 
+INSERT INTO BK_Clothing VALUES (5, "Long Sleeve", "Brown", 10, 1);
+
+INSERT INTO BK_Clothing VALUES (6, "Jeans", "Dark Blue", 20, 2);
+INSERT INTO BK_Clothing VALUES (7, "Jeans", "Light Blue", 23, 2);
+INSERT INTO BK_Clothing VALUES (8, "Jeans", "Black", 25, 2);
+INSERT INTO BK_Clothing VALUES (9, "Cargo Pants", "Camoflauge", 30, 2);
+INSERT INTO BK_Clothing VALUES (10, "Sweatpants", "Gray", 20, 2);
+
+INSERT INTO BK_Clothing VALUES (11, "Coat", "Black", 50, 3);
+INSERT INTO BK_Clothing VALUES (12, "Coat", "Dark Blue", 50, 3);
+INSERT INTO BK_Clothing VALUES (13, "Coat", "Red", 55, 3);
+INSERT INTO BK_Clothing VALUES (14, "Puffer Jacket", "Gray", 40, 3);
+INSERT INTO  BK_Clothing VALUES (15, "Puffer Jacket", "Olive Green", 40, 3);
+
+INSERT INTO BK_Clothing VALUES (16, "Boots", "Gray", 30, 4);
+INSERT INTO BK_Clothing VALUES (17, "Rain Boots", "Black", 40, 4);
+INSERT INTO BK_Clothing VALUES (18, "Snow Boots", "Dark Blue", 40, 4);
+INSERT INTO BK_Clothing VALUES (19, "Sneakers", "Black and White", 25, 4);
+INSERT INTO BK_Clothing VALUES (20, "Sneakers", "Gray", 23, 4);
+
+--Display the database ordered by price.
+SELECT * FROM BK_Clothing ORDER BY Price;
+
+--What items in the store have a price over 25?
+SELECT * FROM BK_Clothing WHERE Price >25;
+
+--What is the avg price of items in the store by floor?
+SELECT Floor, AVG(Price) FROM BK_Clothing GROUP BY Floor;
