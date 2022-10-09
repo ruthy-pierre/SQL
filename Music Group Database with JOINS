@@ -1,12 +1,12 @@
 /* Create table about the people and what they do here */
 
-CREATE TABLE singers (
+CREATE TABLE artists (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name TEXT,
     last_name TEXT,
     group_id INTEGER);
     
-INSERT INTO singers (first_name, last_name, group_id)
+INSERT INTO artists (first_name, last_name, group_id)
 VALUES 
 ('Bruno', 'Mars', 1),
 ('John', 'Lennon', 2),
@@ -28,12 +28,12 @@ VALUES
     
 CREATE TABLE songs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    singer_id INTEGER,
+    artist_id INTEGER,
     group_id INTEGER,
     title TEXT,
     genre TEXT);
     
-INSERT INTO songs (singer_id, group_id, title, genre)
+INSERT INTO songs (artist_id, group_id, title, genre)
 VALUES
 (3, 3, 'I Gotta Feeling', 'Hip-Hop/Pop'),
 (2, 2, 'Let It Be', 'Rock'),
@@ -54,11 +54,11 @@ VALUES
 
 CREATE TABLE group_members (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    singer1_id INTEGER,
-    singer2_id INTEGER,
+    artist1_id INTEGER,
+    artist2_id INTEGER,
     group_name TEXT);
 
-INSERT INTO group_members (singer1_id, singer2_id, group_name)
+INSERT INTO group_members (artist1_id, artist2_id, group_name)
 VALUES
 (1, 5, 'Silk Sonic'),
 (2, 8, 'The Beatles'),
@@ -69,9 +69,9 @@ VALUES
 (11, 16, 'Maroon 5'),
 (12, 15, 'B2K');
 
-SELECT singers.first_name, singers.last_name, group_members.group_name FROM singers 
+SELECT artists.first_name, artists.last_name, group_members.group_name FROM artists 
     JOIN group_members
-    ON singers.group_id = group_members.id;
+    ON artists.group_id = group_members.id;
 
 SELECT group_members.group_name, songs.genre FROM songs 
     JOIN group_members ON songs.group_id = group_members.id 
