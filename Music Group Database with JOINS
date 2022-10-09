@@ -69,13 +69,11 @@ VALUES
 (11, 16, 'Maroon 5'),
 (12, 15, 'B2K');
 
-SELECT * FROM singers;
-SELECT * FROM songs;
-SELECT * FROM group_members;
+SELECT group_members.group_name, songs.genre FROM songs 
+JOIN group_members ON songs.group_id = group_members.id
+GROUP BY group_name;
 
-SELECT a.first_name, a.last_name, b.first_name, b.last_name, group.group_name
-FROM group_members group
-JOIN singers a
-ON singer1_id = a.id
-JOIN singers b
-ON singer2_id = b.id;
+SELECT group_members.group_name, songs.title AS song_title
+FROM group_members
+JOIN songs ON songs.group_id = group_members.id
+GROUP BY songs.title;
