@@ -1,4 +1,4 @@
-/* Create table about the people and what they do here */
+/* Created tables about music artists, the music groups they are in, and the songs they creadted. I used joins in different queries to combine relevant data and answer questions about the artists. */
 
 CREATE TABLE artists (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
