@@ -1,0 +1,81 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE singers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT,
+    last_name TEXT,
+    group_id INTEGER);
+    
+INSERT INTO singers (first_name, last_name, group_id)
+VALUES 
+('Bruno', 'Mars', 1),
+('John', 'Lennon', 2),
+('Fergie', 'Duhamel', 3),
+('Lauryn', 'Hill', 4),
+('Anderson', 'Paak', 1),
+('William', 'Adams Jr', 3),
+('Wyclef', 'Jean', 4),
+('Paul', 'McCartney', 2),
+('Beyonce', 'Knowles', 5),
+('Michael', 'Jackson', 6),
+('Adam', 'Levine', 7),
+('Omarion', 'Grandberry', 8),
+('Jermaine', 'Jackson', 6),
+('Kelly', 'Rowland', 5),
+('Jarell', 'Houston', 8),
+('PJ', 'Morton', 7);
+    
+    
+CREATE TABLE songs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    singer_id INTEGER,
+    group_id INTEGER,
+    title TEXT,
+    genre TEXT);
+    
+INSERT INTO songs (singer_id, group_id, title, genre)
+VALUES
+(3, 3, 'I Gotta Feeling', 'Hip-Hop/Pop'),
+(2, 2, 'Let It Be', 'Rock'),
+(4, 4, 'Ready or Not', 'Hip-Hop'),
+(1, 1, 'Leave The Door Open', 'R&B'),
+(10, 6, 'ABC', 'Pop'),
+(9, 5, 'Survivor', 'R&B'),
+(12, 8, 'Girlfriend', 'R&B'),
+(11, 7, 'Sugar', 'Pop'),
+(6, 3, 'I Gotta Feeling', 'Hip-Hop/Pop'),
+(8, 2, 'Let It Be', 'Rock'),
+(7, 4, 'Ready or Not', 'Hip-Hop'),
+(5, 1, 'Leave the Door Open', 'R&B'),
+(13, 6, 'ABC', 'Pop'),
+(14, 5, 'Survivor', 'R&B'),
+(15, 8, 'Girlfriend', 'R&B'),
+(16, 7, 'Sugar', 'Pop');
+
+CREATE TABLE group_members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    singer1_id INTEGER,
+    singer2_id INTEGER,
+    group_name TEXT);
+
+INSERT INTO group_members (singer1_id, singer2_id, group_name)
+VALUES
+(1, 5, 'Silk Sonic'),
+(2, 8, 'The Beatles'),
+(3, 6, 'Black Eyed Peas'),
+(4, 7, 'The Fugees'),
+(9, 14, 'Destinys Child'),
+(10, 13, 'The Jackson 5'),
+(11, 16, 'Maroon 5'),
+(12, 15, 'B2K');
+
+SELECT * FROM singers;
+SELECT * FROM songs;
+SELECT * FROM group_members;
+
+SELECT a.first_name, a.last_name, b.first_name, b.last_name, group.group_name
+FROM group_members group
+JOIN singers a
+ON singer1_id = a.id
+JOIN singers b
+ON singer2_id = b.id;
