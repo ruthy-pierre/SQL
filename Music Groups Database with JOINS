@@ -71,7 +71,7 @@ VALUES
 
 SELECT artists.first_name, artists.last_name, group_members.group_name FROM artists 
     JOIN group_members
-    ON artists.group_id = group_members.id;
+    ON artists.group_id = group_members.id ORDER BY group_name;
 
 SELECT group_members.group_name, songs.genre FROM songs 
     JOIN group_members ON songs.group_id = group_members.id 
@@ -79,4 +79,4 @@ SELECT group_members.group_name, songs.genre FROM songs
 
 SELECT group_members.group_name, songs.title AS song_title FROM group_members
     JOIN songs ON songs.group_id = group_members.id         
-    GROUP BY songs.title;
+    GROUP BY group_name;
