@@ -1,0 +1,20 @@
+/* This project was created to imagine what a fitness tracker  app's SQL would look like? */
+/* I created a table to store the data and inserted a few example rows in the table.*/
+
+CREATE TABLE fitness_tracker (id INTEGER PRIMARY KEY, user_id INTEGER, date TEXT, workout TEXT, breakfast TEXT, lunch TEXT, dinner TEXT, water_oz INTEGER, weight_lbs INTEGER);
+
+INSERT INTO fitness_tracker VALUES (1, 348, "12/05/2022", "cardio", "scrambled eggs", "sandwhich", "salmon and broccoli", 64, 125);
+INSERT INTO fitness_tracker VALUES (2, 348, "12/06/2022", "abs", "cereal", "salad", "chicken and rice", 60, 125);
+INSERT INTO fitness_tracker VALUES (3, 348, "12/07/2022", "lower body", "yogurt", "smoothie", "sushi", 74, 127);
+INSERT INTO fitness_tracker VALUES (4, 348, "12/08/2022", "strength training", "bagel with cream cheese", "ceasar salad", "salmon", 68, 124);
+INSERT INTO fitness_tracker VALUES (5, 348, "12/09/2022", "cardio", "scrambled eggs", "sandwhich", "turkey and mashed potatoes", 64, 125);
+INSERT INTO fitness_tracker VALUES (6, 348, "12/10/2022", "yoga", "spinach omlette", "sandwhich", "salmon", 66, 126);
+
+/*I then used an UPDATE to emulate what happens when a user edits their data in the app.*/
+/*I also used a DELETE to emulate what happens when a user deletes their data in the app.*/
+
+UPDATE fitness_tracker SET lunch = "ramen" WHERE id = 5;
+DELETE FROM fitness_tracker WHERE id = 6;
+SELECT * FROM fitness_tracker;
+
+/*Lastly, I used a SELECT to ensure that the UPDATE and DELETE changes I made to the table, were executed correctly.*/
