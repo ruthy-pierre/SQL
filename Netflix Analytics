@@ -28,7 +28,7 @@ WHERE type='Movie'
 ORDER BY release_year ASC
 LIMIT 1;
 
-#I also used a subquery to answer this question see all of the oldest movies; without assuming that there was only 1 released that year.: 
+#I also used a subquery to answer this question to see all of the oldest movies; without assuming that there was only 1 released that year.: 
 SELECT title, release_year 
 FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
 WHERE type = 'Movie'
