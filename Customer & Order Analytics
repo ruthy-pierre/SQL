@@ -20,9 +20,6 @@ ON cust.order_id=FEB.orderid
 SELECT distinct Product, price
 FROM BIT_DB.JanSales
 WHERE  price in (SELECT MIN(price) FROM BIT_DB.JanSales)
-#OR 
-SELECT distinct product, price FROM BIT_DB.JanSales 
-ORDER BY price ASC LIMIT 1
 
 #5. What is the total revenue for each product sold in January?
 SELECT SUM(quantity)*price AS revenue, product
