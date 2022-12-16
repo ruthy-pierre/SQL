@@ -1,3 +1,6 @@
+#For this project, I added a new table to the BIT_DB database. 
+#The data I will use for this project will be about city bike lanes and their safety ratings.
+
 CREATE TABLE BIT_DB.CityBikeLanes (
 id integer primary key,
 year_installed year not null,
@@ -77,7 +80,7 @@ SELECT * FROM CityBikeLanes LIMIT 10
 SELECT * FROM CityBikeLanes WHERE street='Walnut'
 
 WITH safety_average_cte AS (
-SELECT street, AVG(safetyrating) as 'rating'
+SELECT street, AVG(safetyrating) AS 'rating'
 FROM citybikelanes
 GROUP BY street
 )
@@ -90,6 +93,6 @@ GROUP BY street
 SELECT 
 street,
 rating,
-'safe lane' as 'label'
+'safe lane' AS 'label'
 FROM safety_average_cte
 WHERE rating >=4
