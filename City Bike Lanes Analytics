@@ -1,5 +1,5 @@
 #For this project, I added a new table to the BIT_DB database. 
-#The data I will use for this project will be about city bike lanes and their safety ratings.
+#The data I used for this project is about city bike lanes and their safety ratings.
 
 CREATE TABLE BIT_DB.CityBikeLanes (
 id integer primary key,
