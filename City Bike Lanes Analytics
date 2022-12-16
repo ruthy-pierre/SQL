@@ -71,28 +71,37 @@ INSERT INTO BIT_DB.CityBikeLanes values(58,2011, 2021, "Beaver", 3.5, 2.5, "no")
 INSERT INTO BIT_DB.CityBikeLanes values(59,2008, 2021,"Kensington",4,4.9,"yes");
 INSERT INTO BIT_DB.CityBikeLanes values(60,2002, 2021,"Mouse",4.5,4.3,"no");
 
+#To get familiar with the data I  inserted into the database, I ran these 2 queries separately and noticed the results of each one:
 -- QUERY #1 
 -- Get an overview of the data. Instead of looking at the entire table, 10 rows will do. 
 SELECT * FROM CityBikeLanes LIMIT 10
+-- This table has information about local bike lanes.
+  -- This includes the street name they're on, the year they were first installed, the year they were updated, how wide they are, and their safety rating.
 
 -- QUERY #2 
--- Run this SQL and make note of what you see. Why are there two rows in the results? 
+-- I ran this SQL and made note of what I saw. 
 SELECT * FROM CityBikeLanes WHERE street='Walnut'
 
+-- Walnut street has two different safety ratings: 3.7 and 3.8. 
+  -- That's because there were two different technicians who each rated the bike lanes individually.
+  
+-- For this CTE, I wanted to calculate the average safety rating of each bike lane. 
 WITH safety_average_cte AS (
 SELECT street, AVG(safetyrating) AS 'rating'
-FROM citybikelanes
+FROM CityBikeLanes
 GROUP BY street
 )
+-- Instead of 60 results containing 30 street names and 2 safety ratings per street, my SQL now gives me 30 street names with one safety rating per street.
+  --(The average of the two safety ratings given by the two technicians).
 
-#Now that we've created our CTE, we need to write an additional SQL query that does these things:
+#After I created my CTE, I needed to write an additional SQL query that did the following:
   #1. Selects the average safetyrating for each bike lane from the CTE
   #2. Filters to only the bike lanes that have an average safety rating of 4.0 or higher
   #3. Creates a label for these bike lanes that says "Safe Lane"
 
-SELECT 
-street,
-rating,
-'safe lane' AS 'label'
+SELECT street, rating, 'safe lane' AS 'label'
 FROM safety_average_cte
 WHERE rating >=4
+
+-- I needed to run the CTE and the above query at the same time.
+  -- This is becaise the query is selecting "FROM safety_average_cte", but there is no such table in our database called "safety_average_cte".
