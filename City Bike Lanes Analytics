@@ -91,8 +91,9 @@ SELECT street, AVG(safetyrating) AS 'rating'
 FROM CityBikeLanes
 GROUP BY street
 )
--- Instead of 60 results containing 30 street names and 2 safety ratings per street, my SQL now gives me 30 street names with one safety rating per street.
-  --(The average of the two safety ratings given by the two technicians).
+-- Instead of 60 results containing 30 street names and 2 safety ratings per street, 
+  -- my SQL now gives me 30 street names with one safety rating per street.
+    --(The average of the two safety ratings given by the two technicians).
 
 #After I created my CTE, I needed to write an additional SQL query that did the following:
   #1. Selects the average safetyrating for each bike lane from the CTE
@@ -105,3 +106,21 @@ WHERE rating >=4
 
 -- I needed to run the CTE and the above query at the same time.
   -- This is becaise the query is selecting "FROM safety_average_cte", but there is no such table in our database called "safety_average_cte".
+
+-- For this data analysis portion I wanted to provide:
+  -- A list of all the bike lanes, both safety ratings for each lane, the average safety rating for each lane, 
+    -- and a label with the recommendation as "Remove", "Leave As-Is", or "Improvements Needed".
+      -- Bike lanes with an average safety rating of 4 or more should be labeled "Leave As-Is".
+      -- Bike lanes with an average safety rating of less than 2.5 should be labeled as "Remove".
+      -- All other bike lanes should be labeled as "Improvements Needed".
+      
+
+SELECT street, safetyrating, AVG(safetyrating)
+OVER (PARTITION BY street) AS "Average_safety_rating"
+CASE
+  WHEN OVER (PARTITION BY safetyrating) >=4 THEN "Leave As-Is"
+  WHEN OVER (PARTITION BY safetyrating) <2.5 THEN "Remove"
+  ELSE "Improvements Needed"
+END AS "Recommendation"
+FROM CityBikeLanes
+ 
