@@ -1,40 +1,40 @@
-# Here are potential answers to the example questions in the final SQL project. 
-# Note that there are often multiple ways to write SQL to come up with the same answer. 
+#In this SQL code, I am querying a database that contains data about a digital media store, in order to answer questions about the data.
+# The data includes tables for artists, albums, media tracks, invoices, customers, and employees.  
 
 #1. 
-SELECT FirstName, LastName, CustomerId, Country 
+SELECT Customerid, FirstName, LastName, Country 
 FROM chinook.customers 
-WHERE Country != "USA";
+WHERE Country <> 'USA';
 
 #2. 
 SELECT * FROM chinook.customers 
-WHERE Country = "Brazil" ;
+WHERE Country = 'Brazil';
 
 #3. 
-SELECT cust.FirstName, cust.LastName, inv.InvoiceId, inv.BillingCountry, inv.InvoiceDate
-FROM chinook.invoices as inv 
-LEFT JOIN chinook.customers as cust 
-on inv.CustomerId = cust.CustomerId 
-WHERE inv.BillingCountry = "Brazil";
+SELECT FirstName, LastName, Invoiceid, InvoiceDate, BillingCountry 
+FROM chinook.customers AS cust
+LEFT JOIN chinook.invoices AS invo
+ON cust.CustomerId = invo.CustomerId
+WHERE Country = 'Brazil';
 
 #4. 
 SELECT * FROM chinook.Employees
-WHERE Title = "Sales Support Agent" ;
+WHERE Title = "Sales Support Agent";
 
 #5. 
-SELECT DISTINCT BillingCountry FROM chinook.Invoices ;
+SELECT DISTINCT BillingCountry FROM chinook.Invoices;
 
 #6.
-SELECT emp.LastName, emp.Firstname, inv.InvoiceId
-FROM chinook.Employees emp 
-JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
-JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId;
+SELECT emp.LastName, emp.Firstname, invo.InvoiceId
+FROM chinook.Employees AS emp 
+JOIN chinook.Customers AS cust ON cust.SupportRepId = emp.EmployeeId
+JOIN chinook.Invoices AS invo ON invo.CustomerId = cust.CustomerId;
 
 #7. 
-SELECT emp.LastName, emp.Firstname, cust.FirstName, cust.LastName, cust.Country, inv.total
-FROM chinook.employees emp 
-JOIN chinook.Customers cust ON cust.SupportRepId = emp.EmployeeId
-JOIN chinook.Invoices Inv ON Inv.CustomerId = cust.CustomerId;
+SELECT emp.LastName, emp.FirstName, cust.FirstName, cust.LastName, cust.Country, invo.Total 
+FROM chinook.employees AS emp
+JOIN chinook.customers AS cust ON emp.EmployeeId = cust.SupportRepId
+JOIN chinook.invoices AS invo ON invo.CustomerId = cust.CustomerId;
 
 #8. 
 SELECT COUNT(*)
