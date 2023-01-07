@@ -56,7 +56,7 @@ SELECT name, popularity, alignment, MIN(strength) FROM marvels;
 --What is the average speed of a Marvel character? 
 SELECT ROUND(AVG(speed)) AS Avg_speed FROM marvels;
 
---Which Marvel characters have an energry project that is greater than 5?
+--Which Marvel characters have an energry projection that is greater than 5?
 SELECT name, energy_projection FROM marvels GROUP BY name HAVING energy_projection >=5;
 
 --Classify the Marvel characters based on their popularity ranking.
@@ -69,7 +69,7 @@ SELECT name,
         ELSE "very low popularity"
     END AS popularity_standing FROM marvels;
 
---Which Marvel characters are female and have a popularity ranking that is >40?
+--Which Marvel characters are female and have a popularity ranking that is <40?
 SELECT name FROM marvels WHERE popularity <40 AND gender = "Female";
 
 --Which Marvel characters have a speed ranking >5 OR a strength ranking >5?
