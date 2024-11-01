@@ -1,0 +1,97 @@
+-- Create a CTE for Q1 Sales Data
+
+WITH Q1_Sales AS (
+   SELECT * FROM BIT_DB.JanSales
+   UNION ALL
+   SELECT * FROM BIT_DB.FebSales
+   UNION ALL
+   SELECT * FROM BIT_DB.MarSales
+)
+
+
+-- 1. Monthly Revenue Insights for Q1
+-- This query calculates the total revenue for each month in Q1, 
+rounding each monthly revenue to two decimal places.
+
+SELECT 
+   'January' AS Month, ROUND(SUM(quantity * price), 2) AS Revenue
+FROM BIT_DB.JanSales
+UNION ALL
+SELECT 
+   'February', ROUND(SUM(quantity * price), 2)
+FROM BIT_DB.FebSales
+UNION ALL
+SELECT 
+   'March', ROUND(SUM(quantity * price), 2)
+FROM BIT_DB.MarSales;
+
+-- 2. Total Revenue by Product for Q1
+-- This query calculates the total revenue by product across all three months in Q1, 
+providing insights into high-revenue products.
+
+SELECT 
+   product, 
+   ROUND(SUM(quantity * price), 2) AS TotalRevenue
+FROM Q1_Sales
+GROUP BY product
+ORDER BY TotalRevenue DESC;
+
+
+-- 3. Product Sales by Location for Q1
+This query provides a breakdown of revenue by product and location, 
+showing how each product performs in different regions.
+
+SELECT 
+   location, 
+   product, 
+   ROUND(SUM(quantity * price), 2) AS Revenue
+FROM Q1_Sales
+GROUP BY location, product
+ORDER BY location, Revenue DESC;
+
+
+-- 4. Order Counts and Profitability Insights by Location for Q1
+-- This query shows the number of orders per location and the average revenue per order 
+to assess profitable locations.
+
+SELECT 
+   location, 
+   COUNT(DISTINCT orderID) AS OrderCount, 
+   ROUND(AVG(quantity * price), 2) AS AvgProfit
+FROM Q1_Sales
+GROUP BY location
+ORDER BY AvgProfit DESC;
+
+
+-- 5. Average Order Value (AOV) for Q1
+-- This query calculates the average order value (AOV) for all Q1 orders, 
+which indicates the typical amount spent per order.
+
+SELECT 
+   ROUND(SUM(quantity * price) / COUNT(DISTINCT orderID), 2) AS AvgOrderValue
+FROM Q1_Sales;
+
+
+-- 6. Customer Segmentation by Purchase Frequency for Q1
+-- This query identifies customers who made multiple purchases in Q1, 
+which helps segment high-frequency buyers for loyalty programs.
+
+SELECT 
+   customer_id, 
+   COUNT(orderID) AS PurchaseFrequency
+FROM Q1_Sales
+GROUP BY customer_id
+HAVING COUNT(orderID) > 1
+ORDER BY PurchaseFrequency DESC;
+
+
+-- 7. Customer Lifetime Value (CLV) for Q1
+-- This query estimates the revenue contributed by each customer in Q1, 
+helping identify high-value customers for loyalty investments.
+
+SELECT 
+   customer_id, 
+   ROUND(SUM(quantity * price), 2) AS LifetimeValue
+FROM Q1_Sales
+GROUP BY customer_id
+ORDER BY LifetimeValue DESC;
